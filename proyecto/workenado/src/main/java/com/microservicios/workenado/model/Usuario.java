@@ -3,6 +3,7 @@ package com.microservicios.workenado.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Table(name = "Usuario")
 
 
 
@@ -29,14 +30,19 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 100)
     private String username;
 
+    @Column(nullable = false, length = 100)
     private String password;
 
+    @Column(nullable = false, length = 100)
     private String email;
 
-    private String nombres;
+    @Column(nullable = false, length = 100)
+    private String nombres; 
 
+    @Column(nullable = false, length = 100)
     private String apellido;
 
     @ManyToOne
