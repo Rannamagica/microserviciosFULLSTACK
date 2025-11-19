@@ -24,5 +24,4 @@ public class LoginController {
 
         return loginService.GuardarContacto(login);
     }
-    
 }

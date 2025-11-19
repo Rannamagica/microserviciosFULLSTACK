@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table (name = "logins")
+@Table (name = "Contacto")
 public class Login {
 
     @Id
@@ -28,5 +28,4 @@ public class Login {
     @Column(nullable = false , length = 100)
     private String email;
     
-
 }

@@ -45,11 +45,12 @@ public class ServiceUsuarios {
         dto.setCorreo(usuario.getEmail());
         dto.setNombres(usuario.getNombres());
         dto.setApellido(usuario.getApellido());
+        dto.setTelefono(usuario.getTelefono());
         dto.setRol(usuario.getRol());
         return dto;
     }
     
-    public Usuario crearUsuario(String username, String password, String nombres, String apellido, String correo,
+    public Usuario crearUsuario(String username, String password, String nombres, String apellido, String correo,String telefono,
             Long roleId) {
         if (password == null || password.isBlank()) {
             throw new RuntimeException("La contraseña no puede ser nula ni vacía");
@@ -64,6 +65,7 @@ public class ServiceUsuarios {
         user.setEmail(correo);
         user.setRol(role);
         user.setNombres(nombres);
+        user.setTelefono(telefono);
         user.setApellido(apellido);
 
         return usuarioRepository.save(user);
@@ -116,10 +118,13 @@ public class ServiceUsuarios {
         response.setCorreo(usuario.getEmail());
         response.setNombres(usuario.getNombres());
         response.setApellido(usuario.getApellido());
+        response.setTelefono(usuario.getTelefono());
         response.setRol(usuario.getRol());
 
         return response;
     }
+
+    
 }
 
 

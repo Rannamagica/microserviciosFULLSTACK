@@ -38,25 +38,16 @@ public class LoadDatabase {
                     
                     //--------------------------------------------------------------------------------------------------------------
                     // estos roles no se usan ignorar
-                    Rol UserP=new Rol();
-                    UserP.setNombre("gestor de inventario ");
-                    roleRepo.save(UserP);
-
-
-                    Rol soporte=new Rol();
-                    soporte.setNombre("Soporte y administrador de sistemas");
-                    roleRepo.save(soporte);
-
+                    
                     
                     
 
-                    userRepo.save(new Usuario(null,"felipe","123","fege@123","fernando","villalobo",admin));
-                    userRepo.save(new Usuario(null,"juan","321","dasCadez@123","gabriel","jorquera",user));
-                    userRepo.save(new Usuario(null,"pepe","567","pera@123","estevan","torres",Rec));
+                    userRepo.save(new Usuario(null,"felipe","123","fege@123","fernando","villalobo","+56933993853",admin));
+                    userRepo.save(new Usuario(null,"juan","321","dasCadez@123","gabriel","jorquera","+56933993855",user));
+                    userRepo.save(new Usuario(null,"pepe","567","pera@123","estevan","torres","+56933993851",Rec));
 
                     //---------------------------------------------------------------------------------------------------------------------------------------------
-                    userRepo.save(new Usuario(null,"daniela","5676","pera777@123","fortachon","gaspar",UserP));
-                    userRepo.save(new Usuario(null,"victor","5676","pera777@12356","nicolas","sotomayor",soporte));
+                    
 
                     System.out.println("Datos iniciales cargados ");
 

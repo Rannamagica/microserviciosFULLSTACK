@@ -57,6 +57,7 @@ public class UsuarioController {
                 usuario.getPassword(),
                 usuario.getNombres(),
                 usuario.getApellido(),
+                usuario.getTelefono(),
                 usuario.getEmail(),
                 roleId
             );

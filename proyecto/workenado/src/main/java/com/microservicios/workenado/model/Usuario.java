@@ -45,6 +45,10 @@ public class Usuario {
     @Column(nullable = false, length = 100)
     private String apellido;
 
+    @Column(nullable = false, length = 12)
+    private String telefono;
+    
+
     @ManyToOne
     @JoinColumn(name = "rol_id", nullable = false)
     @JsonIgnoreProperties("usuarios")
