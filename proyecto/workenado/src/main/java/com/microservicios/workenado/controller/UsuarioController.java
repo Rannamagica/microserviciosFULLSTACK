@@ -97,4 +97,10 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
+    @GetMapping("/user/{id}/existe")
+    public ResponseEntity<Boolean> existeUsuario(@PathVariable Long id) {
+        boolean existe = usuarioService.buscarPorId(id) != null;
+        return ResponseEntity.ok(existe);
+    }
 }

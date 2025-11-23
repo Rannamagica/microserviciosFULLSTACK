@@ -43,6 +43,10 @@ public class Posteo {
 
     @Column(nullable = false, length = 500)
     private String descripcion;
+
+    @Column(nullable = false)
+    private Long usuarioId;
+
     
 
 }

@@ -12,7 +12,7 @@ import com.fullstack.register.service.RegisterService;
 
 
 @RestController
-@RequestMapping("/contacto")
+@RequestMapping("/api/contacto")
 @CrossOrigin(origins = "")
 public class RegisterController {
 
