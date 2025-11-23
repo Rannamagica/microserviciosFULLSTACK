@@ -34,11 +34,6 @@ public class LoadDatabase {
                     Rec.setNombre("Reclutador");
                     roleRepo.save(Rec);
 
-
-                    
-                    //--------------------------------------------------------------------------------------------------------------
-                    // estos roles no se usan ignorar
-                    
                     
                     
 
