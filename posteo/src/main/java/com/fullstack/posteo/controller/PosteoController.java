@@ -14,6 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fullstack.posteo.model.Posteo;
 import com.fullstack.posteo.service.PosteoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping("/api/posteo")
 public class PosteoController {
@@ -21,6 +27,20 @@ public class PosteoController {
     @Autowired
     private PosteoService posteoService;
 
+
+
+
+    @Operation(summary = "Crear un nuevo posteo de trabajo")
+    @ApiResponses(value = {
+    @ApiResponse(responseCode = "200", description = "Posteo creado correctamente",
+        content = @Content(mediaType = "application/json",
+            schema = @Schema(implementation = Posteo.class))
+    ),
+    @ApiResponse(responseCode = "400", description = "Datos inválidos",
+        content = @Content),
+    @ApiResponse(responseCode = "404", description = "Usuario no encontrado",
+        content = @Content)
+    })
     @PostMapping("/crear")
     public Posteo crearPosteo(
             @RequestParam Long usuarioId,
@@ -45,18 +65,63 @@ public class PosteoController {
     }
 
 
-    // Obtener todos los posteos
+ 
+    @Operation(summary = "Obtener la lista de todos los posteos")
+    @ApiResponses(value = {
+    @ApiResponse(
+        responseCode = "200",
+        description = "Posteos encontrados",
+        content = @Content(
+            mediaType = "application/json",
+            schema = @Schema(implementation = Posteo.class)
+        )
+    ),
+    @ApiResponse(
+        responseCode = "204",
+        description = "No existen posteos disponibles",
+        content = @Content
+    )
+    })   // Obtener todos los posteos
     @GetMapping("/lista")
     public List<Posteo> obtenerTodos() {
         return posteoService.TodosLosPosteos();
     }
 
-    // Obtener un posteo por ID
+
+    @Operation(summary = "Obtener un posteo por su ID")
+    @ApiResponses(value = {
+    @ApiResponse(
+        responseCode = "200",
+        description = "Posteo encontrado",
+        content = @Content(
+            mediaType = "application/json",
+            schema = @Schema(implementation = Posteo.class)
+        )
+    ),
+    @ApiResponse(
+        responseCode = "404",
+        description = "Posteo no encontrado",
+        content = @Content
+    )
+    })
     @GetMapping("/{id}")
     public Posteo obtenerPorId(@PathVariable Long id) {
         return posteoService.obtenerporid(id);
     }
 
+    @Operation(summary = "Eliminar un posteo por su ID")
+    @ApiResponses(value = {
+    @ApiResponse(
+        responseCode = "200",
+        description = "Posteo eliminado correctamente",
+        content = @Content(mediaType = "application/json")
+    ),
+    @ApiResponse(
+        responseCode = "404",
+        description = "Posteo no encontrado",
+        content = @Content
+    )
+    })
     // Eliminar un posteo por ID
     @DeleteMapping("/eliminar/{id}")
     public String eliminarPost(@PathVariable Long id) {

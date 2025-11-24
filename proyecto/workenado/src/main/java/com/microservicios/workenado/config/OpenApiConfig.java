@@ -13,7 +13,7 @@ public class OpenApiConfig {
         return new OpenAPI()
                 .info(
                         new Info()
-                                .title("rating ")
+                                .title("Usuarios Microservice API")
                                 .version("1.0")
                                 .description("Documentacion  de un microservicio de reservas de horas ")
 
