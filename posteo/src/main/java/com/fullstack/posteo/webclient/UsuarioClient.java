@@ -30,5 +30,21 @@ public class UsuarioClient {
             .block();  // Sincroniza la respuesta
 
             
+    }
+
+    public boolean esReclutador(Long id) {
+    try {
+        Map usuario = getUsuarioById(id);
+        if (usuario == null) return false;
+
+        Map rol = (Map) usuario.get("rol");
+        if (rol == null) return false;
+
+        String nombreRol = rol.get("nombre").toString();
+        return nombreRol.equalsIgnoreCase("RECLUTADOR");
+
+    } catch (Exception e) {
+        return false;
+    }
 }
 }

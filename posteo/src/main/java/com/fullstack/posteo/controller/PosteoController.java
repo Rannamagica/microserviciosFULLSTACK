@@ -1,8 +1,11 @@
 package com.fullstack.posteo.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +20,7 @@ import com.fullstack.posteo.service.PosteoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
@@ -42,26 +46,17 @@ public class PosteoController {
         content = @Content)
     })
     @PostMapping("/crear")
-    public Posteo crearPosteo(
-            @RequestParam Long usuarioId,
-            @RequestParam String empresa,
-            @RequestParam String puesto,
-            @RequestParam String sueldo,
-            @RequestParam String experiencia,
-            @RequestParam String modalidad,
-            @RequestParam String ubicacion,
-            @RequestParam String descripcion
-    ) {
-        return posteoService.crearPosteo(
-                usuarioId,
-                empresa,
-                puesto,
-                sueldo,
-                experiencia,
-                modalidad,
-                ubicacion,
-                descripcion
-        );
+    public ResponseEntity<?> crearPosteo(@RequestBody Posteo nuevoPosteo) {
+
+        try {
+            Posteo creado = posteoService.crearPosteo(nuevoPosteo);
+            return ResponseEntity.status(HttpStatus.CREATED).body(creado);
+
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                    Map.of("error", e.getMessage())
+            );
+        }
     }
 
 

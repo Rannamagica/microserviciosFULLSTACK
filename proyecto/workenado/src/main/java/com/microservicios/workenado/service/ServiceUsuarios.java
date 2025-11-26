@@ -15,7 +15,6 @@ import com.microservicios.workenado.repository.RoleRepository;
 import com.microservicios.workenado.repository.UsuarioRepository;
 
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.Email;
 
 @Service
 @Transactional
@@ -123,7 +122,7 @@ public class ServiceUsuarios {
 
         return response;
     }
-
+    
     
 }
 

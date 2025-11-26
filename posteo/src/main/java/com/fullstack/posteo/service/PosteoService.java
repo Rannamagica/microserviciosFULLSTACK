@@ -29,36 +29,36 @@ public class PosteoService {
     }
 
 
-    public Posteo crearPosteo(
-            Long usuarioId,
-            String empresa,
-            String puesto,
-            String sueldo,
-            String experiencia,
-            String modalidad,
-            String ubicacion,
-            String descripcion
-    ) {
+    public Posteo crearPosteo(Posteo nuevoPosteo) {
 
-        // Obtener usuario desde microservicio usuario
-        Map<String, Object> usuario = usuarioClient.getUsuarioById(usuarioId);
-
-        // Si el usuario no existe → error
+        
+        Map<String, Object> usuario = usuarioClient.getUsuarioById(nuevoPosteo.getUsuarioId());
         if (usuario == null || usuario.isEmpty()) {
-            throw new RuntimeException("El usuario no existe: " + usuarioId);
+            throw new RuntimeException("El usuario no existe o es inválido");
         }
 
-        Posteo post = new Posteo();
-        post.setUsuarioId(usuarioId);
-        post.setEmpresa(empresa);
-        post.setPuesto(puesto);
-        post.setSueldo(sueldo);
-        post.setExpereriencia(experiencia);
-        post.setModalidad(modalidad);
-        post.setUbicacion(ubicacion);
-        post.setDescripcion(descripcion);
+       
+        Map<String, Object> rolMap = (Map<String, Object>) usuario.get("rol");
+        if (rolMap == null) {
+            throw new RuntimeException("El usuario no tiene rol asignado");
+        }
 
-        return repositoryPosteo.save(post);
+        String nombreRol = rolMap.get("nombre").toString();
+
+        if (!nombreRol.equalsIgnoreCase("RECLUTADOR")) {
+            throw new RuntimeException("Acceso denegado: Solo los reclutadores pueden crear posteos");
+        }
+
+        
+        String nombres = (String) usuario.get("nombres");
+        if (nombres == null) {
+            throw new RuntimeException("El nombre del reclutador no está disponible");
+        }
+
+        nuevoPosteo.getUsuarioId();  // SOLO si tu entidad lo tiene
+
+    
+        return repositoryPosteo.save(nuevoPosteo);
     }
 
     public List<Posteo> TodosLosPosteos(){
